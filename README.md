@@ -46,6 +46,10 @@ At the end of the workshop exercise, each team is expected to:
     * The key visualizations produced by the application.
     * The team's primary hypotheses regarding the factors contributing to Finnish happiness, based on their analysis and visualization of the data. Remember, correlation does not equal causation, but it's a great starting point for hypotheses!
 
+## 4. Potential Data Sources (Accelerated Start!)
+
+To get you analyzing faster, here are recommended sources with *specific suggestions* for relevant data points or tables. Focus on grabbing data for Finland, and maybe 1-2 comparison countries if you like. **Start with 1-2 indicators from 2 different sources.**
+
 1.  **World Happiness Report Data:**
     * **What:** The primary source for happiness rankings and correlated factors.
     * **Get This:** Download the main data file (usually Excel or CSV) for the **latest available year** from the official [World Happiness Report](https://worldhappiness.report/) site (look for data appendices/downloads) or a reputable source like Kaggle (Example: [https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2024](https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2024) - check relevance).
@@ -106,7 +110,19 @@ At the end of the workshop exercise, each team is expected to:
     * **Registration/API Key Needed?:** Generally **No**.
     * **Bootstrap:** Pick *one* table (like life satisfaction or healthy life years) to download for Finland and maybe neighbours.
 
-**Creative / Humorous Data Ideas (Harder to Source Reliably):**
+6.  **Food Supply Data (via Kaggle - FAOSTAT source):**
+    * **What:** Data on food supply quantity (kg/capita/year) and nutritional values (kcal/capita/day, protein, fat) for various food items across many countries. Originally from the UN Food and Agriculture Organization (FAOSTAT).
+    * **Get This:** Download the CSV from Kaggle: [https://www.kaggle.com/datasets/aliesmaeilpoor/ediblefoods-1961-to-2011](https://www.kaggle.com/datasets/aliesmaeilpoor/ediblefoods-1961-to-2011)
+    * **Key Columns/Data to Use:** Filter by `Area` (e.g., 'Finland'). Select relevant `Item`s (e.g., 'Fish, Seafood', 'Fruits - Excluding Wine', 'Vegetables', 'Animal fats', 'Milk - Excluding Butter') and `Element`s (e.g., `Food supply quantity (kg/capita/yr)` or `Food supply (kcal/capita/day)`).
+    * **Format:** CSV.
+    * **Registration/API Key Needed?:** **Yes**, Kaggle account required to download via website UI. Kaggle API setup needed for programmatic download.
+    * **Bootstrap:** Be aware the data **ends in 2011**. Filter for 'Finland' and start by analyzing the trend for *one or two specific food items* (like Fish or Fruits) or a broad `Element` like total `Food supply (kcal/capita/day)`. Compare its trend over the available years (1961-2011) with happiness data for overlapping years if possible.
+
+**Creative / Humorous Data Ideas (Optional Bonus):**
+
+* These require significant data hunting/cleaning (e.g., scraping Metal Archives for bands, finding coffee import stats, estimating sauna numbers). **Avoid these initially** if the goal is a fast start on analysis. Tackle only if you finish early and want a challenge. *Registration/API keys might be needed for specific niche sources or scraping might be involved (check terms!)*.
+
+By providing these more direct pointers, participants should be able to acquire initial datasets much faster and move on to the core task of analyzing and visualizing with Copilot's help.
 
 * **Sauna Density:** Might require combining data from Statistics Finland (building types) with regional data, or creative estimation. *Registration Needs:* Depends on source; official stats likely open, niche sources might vary.
 * **Coffee Consumption:** Look for data from trade organizations (like the International Coffee Organization) or market research reports. *Registration Needs:* Trade orgs *might* be open; market research sites (e.g., Statista) often require registration or subscription for full data access.
