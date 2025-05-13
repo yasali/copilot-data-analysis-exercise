@@ -68,49 +68,88 @@ To get you analyzing faster, here are recommended sources with *specific suggest
     * **Bootstrap:** This gives you the core happiness score and its commonly associated factors directly.
 
 2.  **Statistics Finland (Tilastokeskus):**
-    * **What:** Official Finnish statistics. Rich but complex. Use the PxWeb interface.
-    * **Get This (Examples - use keywords/codes in StatFin PxWeb):**
-        * **GDP:** Navigate **National Accounts** -> **Annual National Accounts** -> **Gross domestic product (GDP) and gross national income (GNI)**. Look for annual GDP per capita tables (e.g., keyword `GDP`, `per capita`. Table `kans_v` is often relevant).
-        * **Unemployment:** Navigate **Labour market** -> **Employment and unemployment** -> **Labour force survey**. Look for the unemployment rate table (e.g., keyword `unemployment rate`, table `tyonv` or `tyti` series). Select annual averages.
-        * **Life Expectancy:** Navigate **Population** -> **Deaths** -> **Life expectancy**. Look for table by sex (e.g., keyword `life expectancy`, table `kuol_le`).
-        * **Education:** Navigate **Education** -> **Educational structure of population**. Look for tables on population by level of education completed (e.g., keyword `level of education`, table `vaerak_koul`).
-    * **How:** Go to the [StatFin Database access page](https://stat.fi/en/statistics-and-data/statfin-database) and use the PxWeb interface. Browse by topic or search using keywords/table codes. Filter data for desired years and download as CSV/Excel.
-    * **Registration/API Key Needed?:** Generally **No**.
-    * **Bootstrap:** Pick *one* specific indicator (like unemployment rate or GDP per capita) to start.
+    * **What:** Official Finnish statistics. Rich but complex. Use the PxWeb interface or the API.
+    * **Get This:**
+        * When you visit the [StatFin Database access page](https://pxdata.stat.fi/PxWeb/pxweb/en/StatFin/), you can browse and select from a wide range of statistics (e.g., GDP, unemployment, life expectancy, education, etc.).
+        * **Important:** You cannot simply download the data as CSV/Excel directly for all tables. Instead, you need to fetch the data programmatically using the PxWeb API.
+        * Each table provides an "API query" example (see the "Show API query" or similar button). You must use this to fetch your selected data.
+    * **How:**
+        1. Go to the [StatFin Database access page](https://pxdata.stat.fi/PxWeb/pxweb/en/StatFin/).
+        2. Browse by topic or search using keywords/table codes (e.g., GDP, unemployment rate, life expectancy, education).
+        3. Select your desired table and filter for the years, variables, and breakdowns you want.
+        4. Click the "Show API query" button to get the API endpoint and example JSON query for your selection.
+        5. Fetch the data using a script or your app. For example, you can use Python:
 
-3.  **World Bank Open Data:**
-    * **What:** Global indicators, good for basic comparisons.
-    * **Get This (Example Indicators - search by name or code):**
-        * `GDP per capita (current US$)`: Code `NY.GDP.PCAP.CD`
-        * `Life expectancy at birth, total (years)`: Code `SP.DYN.LE00.IN`
-        * `Unemployment, total (% of total labor force) (modeled ILO estimate)`: Code `SL.UEM.TOTL.ZS`
-        * `Individuals using the Internet (% of population)`: Code `IT.NET.USER.ZS`
-    * **How:** Go to [https://data.worldbank.org/](https://data.worldbank.org/). Search for these indicators. Select Finland (and maybe Sweden/Norway/Denmark for comparison). View/download the time series data as CSV/Excel.
-    * **Registration/API Key Needed?:** Generally **No**.
-    * **Bootstrap:** Grab the time series for *one or two* of these indicators for Finland.
+           ```python
+           import requests
+           import json
+           import os
 
-4.  **OECD Data:**
-    * **What:** Data for OECD countries, strong on well-being metrics.
-    * **Get This (Example Datasets/Indicators):**
-        * **Better Life Index:** Explore this dataset directly on the OECD site for comparative scores on dimensions like `Life Satisfaction`, `Work-Life Balance`, `Community`, `Health Status`. ([https://www.oecdbetterlifeindex.org/](https://www.oecdbetterlifeindex.org/) often has interactive views and underlying data).
-        * **Average Wages:** Search for `Average wages` (e.g., indicator `AV_AN_WAGE`) on the main portal [https://data.oecd.org/](https://data.oecd.org/).
-        * **Social Expenditure:** Search for `Social expenditure` datasets (often under `Social Protection and Well-being`). Look for % of GDP.
-    * **How:** Use the OECD data portal search or browse themes like `Well-being`. Focus on indicators available for Finland. Download relevant tables/indicators (CSV/Excel).
-    * **Registration/API Key Needed?:** Generally **No**.
-    * **Bootstrap:** The Better Life Index scores are a great comparative starting point if available easily. Otherwise, pick one indicator like average wages.
+           url = "https://pxdata.stat.fi:443/PxWeb/api/v1/en/StatFin/eot/statfin_eot_pxt_11ty.px"
+           query = {
+               "query": [
+                   {
+                       "code": "Ikä",
+                       "selection": {
+                           "filter": "item",
+                           "values": ["SSS", "16-24", "25-34", "35-49", "50-64", "65-74", "75-84", "85-"]
+                       }
+                   }
+               ],
+               "response": {"format": "json-stat2"}
+           }
 
-5.  **Eurostat:**
-    * **What:** EU statistics office. Good for EU comparisons, potentially complex navigation.
-    * **Get This (Example Table Codes - use in database search/navigation):**
-        * **Overall life satisfaction:** Code `ilc_pw01` (under Population and social conditions -> Living conditions -> Quality of life)
-        * **GDP per capita (PPS):** Code `nama_10_pc` (under Economy and finance -> National accounts -> GDP and main components)
-        * **Healthy life years at birth:** Code `hlth_hlye` (under Population and social conditions -> Health -> Mortality and life expectancy)
-        * **Persons at risk of poverty or social exclusion:** Code `ilc_peps01` (under Population and social conditions -> Living conditions -> Poverty and social exclusion)
-    * **How:** Go to the [Eurostat Database](https://ec.europa.eu/eurostat/web/main/data/database). Use the search or navigate 'Database by themes'. Use table codes to find data. Filter by country (FI), time, and download (CSV/Excel often best).
-    * **Registration/API Key Needed?:** Generally **No**.
-    * **Bootstrap:** Pick *one* table (like life satisfaction or healthy life years) to download for Finland and maybe neighbours.
+           response = requests.post(url, json=query)
+           data = response.json()
+           # Save fetched data into the 'data' folder for consistency
+           os.makedirs('data', exist_ok=True)
+           with open('data/output.json', 'w') as f:
+               json.dump(data, f)
+           ```
 
-6.  **Food Supply Data (via Kaggle - FAOSTAT source):**
+        6. You can then convert the JSON-stat data to CSV using Python (see the main README for an example with `pyjstat` and `pandas`).
+        7. **Recommendation:** Always save fetched data into a dedicated `data` folder in your project. This keeps raw and processed datasets organized and makes your workflow reproducible.
+    * **Registration/API Key Needed?:** Generally **No**.
+    * **Bootstrap:** Pick *one* specific indicator (like unemployment rate or GDP per capita) to start. You must fetch the data yourself using the API as described above.
+
+3.  **Statistics Finland: Education by Gender, Age, and Field (PxWeb API)**
+    * **What:** Official Finnish statistics on education, broken down by gender, age, and field of education.
+    * **Source (UI):** [https://pxdata.stat.fi/PxWeb/pxweb/fi/StatFin/StatFin__vkour/statfin_vkour_pxt_12br.px/](https://pxdata.stat.fi/PxWeb/pxweb/fi/StatFin/StatFin__vkour/statfin_vkour_pxt_12br.px/)
+    * **How to Fetch (Python Example):**
+
+      ```python
+      import requests
+      import json
+      import os
+
+      url = "https://pxdata.stat.fi:443/PxWeb/api/v1/fi/StatFin/vkour/statfin_vkour_pxt_12br.px"
+      query = {
+          "query": [
+              {"code": "Alue", "selection": {"filter": "item", "values": ["SSS"]}},
+              {"code": "Ikä", "selection": {"filter": "item", "values": [
+                  "SSS", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", "80-"
+              ]}},
+              {"code": "Sukupuoli", "selection": {"filter": "item", "values": ["SSS", "1", "2"]}},
+              {"code": "Koulutusala", "selection": {"filter": "item", "values": [
+                  "SSS", "00T10", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "SSSX00T10", "X"
+              ]}}
+          ],
+          "response": {"format": "json-stat2"}
+      }
+
+      response = requests.post(url, json=query)
+      data = response.json()
+      os.makedirs('data', exist_ok=True)
+      with open('data/statfin_vkour_pxt_12br.json', 'w') as f:
+          json.dump(data, f)
+      print("Saved to data/statfin_vkour_pxt_12br.json")
+      ```
+
+    * **Registration/API Key Needed?:** No
+    * **Bootstrap:** This fetches the full education by gender, age, and field dataset for Finland. You can further process or convert the JSON-stat2 data to CSV for analysis.
+    * **Troubleshooting:** If the code does not work, visit the [source UI](https://pxdata.stat.fi/PxWeb/pxweb/fi/StatFin/StatFin__vkour/statfin_vkour_pxt_12br.px/) to check the correct API endpoint and JSON schema for your query.
+
+4.  **Food Supply Data (via Kaggle - FAOSTAT source):**
     * **What:** Data on food supply quantity (kg/capita/year) and nutritional values (kcal/capita/day, protein, fat) for various food items across many countries. Originally from the UN Food and Agriculture Organization (FAOSTAT).
     * **Get This:** Download the CSV from Kaggle: [https://www.kaggle.com/datasets/aliesmaeilpoor/ediblefoods-1961-to-2011](https://www.kaggle.com/datasets/aliesmaeilpoor/ediblefoods-1961-to-2011)
     * **Key Columns/Data to Use:** Filter by `Area` (e.g., 'Finland'). Select relevant `Item`s (e.g., 'Fish, Seafood', 'Fruits - Excluding Wine', 'Vegetables', 'Animal fats', 'Milk - Excluding Butter') and `Element`s (e.g., `Food supply quantity (kg/capita/yr)` or `Food supply (kcal/capita/day)`).
