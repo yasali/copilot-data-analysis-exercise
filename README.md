@@ -46,12 +46,35 @@ At the end of the workshop exercise, each team is expected to:
     * The key visualizations produced by the application.
     * The team's primary hypotheses regarding the factors contributing to Finnish happiness, based on their analysis and visualization of the data. Remember, correlation does not equal causation, but it's a great starting point for hypotheses!
 
+
 ## 4. Potential Data Sources (Accelerated Start!)
 
 To get you analyzing faster, here are recommended sources with *specific suggestions* for relevant data points or tables. Focus on grabbing data for Finland, and maybe 1-2 comparison countries if you like. **Start with 1-2 indicators from 2 different sources.**
 
+
+---
+
+### Pre-downloaded Data
+
+This repository includes two key datasets already available in the `data/` folder for your convenience:
+
+- **World Happiness Report 2024:**
+    - File: `data/WHR2024.csv`
+    - Contains the latest happiness rankings and associated factors for many countries, including Finland.
+    - Use this as your primary source for happiness scores and related variables.
+
+- **Food Supply Data (FAOSTAT, 1961–2011):**
+    - File: `data/EdibleFoods-1961-2011.csv`
+    - Contains food supply and nutrition data for Finland and other countries, by food item and year.
+    - Use this to explore the relationship between nutrition/food trends and happiness.
+
+You do **not** need to download these files again—they are ready for you to use in your analysis and code examples.
+
+---
+
 1.  **World Happiness Report Data:**
     * **What:** The primary source for happiness rankings and correlated factors.
+    * **Where to find:** The file `data/WHR2024.csv` is already included in this repository.
     * **Get This:** Download the main data file (usually Excel or CSV) for the **latest available year** from the official [World Happiness Report](https://worldhappiness.report/) site (look for data appendices/downloads) or a reputable source like Kaggle (Example: [https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2024](https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2024) - check relevance).
     * **Key Columns to Use:**
         * `Country name`
@@ -67,7 +90,16 @@ To get you analyzing faster, here are recommended sources with *specific suggest
     * **Registration/API Key Needed?:** Generally **No** for direct downloads. Kaggle API needs setup if used.
     * **Bootstrap:** This gives you the core happiness score and its commonly associated factors directly.
 
-2.  **Statistics Finland (Tilastokeskus):**
+2.  **Food Supply Data (via Kaggle - FAOSTAT source):**
+    * **What:** Data on food supply quantity (kg/capita/year) and nutritional values (kcal/capita/day, protein, fat) for various food items across many countries. Originally from the UN Food and Agriculture Organization (FAOSTAT).
+    * **Where to find:** The file `data/EdibleFoods-1961-2011.csv` is already included in this repository.
+    * **Get This:** Download the CSV from Kaggle: [https://www.kaggle.com/datasets/aliesmaeilpoor/ediblefoods-1961-to-2011](https://www.kaggle.com/datasets/aliesmaeilpoor/ediblefoods-1961-to-2011)
+    * **Key Columns/Data to Use:** Filter by `Area` (e.g., 'Finland'). Select relevant `Item`s (e.g., 'Fish, Seafood', 'Fruits - Excluding Wine', 'Vegetables', 'Animal fats', 'Milk - Excluding Butter') and `Element`s (e.g., `Food supply quantity (kg/capita/yr)` or `Food supply (kcal/capita/day)`).
+    * **Format:** CSV.
+    * **Registration/API Key Needed?:** **Yes**, Kaggle account required to download via website UI. Kaggle API setup needed for programmatic download.
+    * **Bootstrap:** Be aware the data **ends in 2011**. Filter for 'Finland' and start by analyzing the trend for *one or two specific food items* (like Fish or Fruits) or a broad `Element` like total `Food supply (kcal/capita/day)`. Compare its trend over the available years (1961-2011) with happiness data for overlapping years if possible.
+
+3.  **Statistics Finland (Tilastokeskus):**
     * **What:** Official Finnish statistics. Rich but complex. Use the PxWeb interface or the API.
     * **Get This:**
         * When you visit the [StatFin Database access page](https://pxdata.stat.fi/PxWeb/pxweb/en/StatFin/), you can browse and select from a wide range of statistics (e.g., GDP, unemployment, life expectancy, education, etc.).
@@ -112,7 +144,7 @@ To get you analyzing faster, here are recommended sources with *specific suggest
     * **Registration/API Key Needed?:** Generally **No**.
     * **Bootstrap:** Pick *one* specific indicator (like unemployment rate or GDP per capita) to start. You must fetch the data yourself using the API as described above.
 
-3.  **Statistics Finland: Education by Gender, Age, and Field (PxWeb API)**
+4.  **Statistics Finland: Education by Gender, Age, and Field (PxWeb API)**
     * **What:** Official Finnish statistics on education, broken down by gender, age, and field of education.
     * **Source (UI):** [https://pxdata.stat.fi/PxWeb/pxweb/fi/StatFin/StatFin__vkour/statfin_vkour_pxt_12br.px/](https://pxdata.stat.fi/PxWeb/pxweb/fi/StatFin/StatFin__vkour/statfin_vkour_pxt_12br.px/)
     * **How to Fetch (Python Example):**
@@ -149,13 +181,26 @@ To get you analyzing faster, here are recommended sources with *specific suggest
     * **Bootstrap:** This fetches the full education by gender, age, and field dataset for Finland. You can further process or convert the JSON-stat2 data to CSV for analysis.
     * **Troubleshooting:** If the code does not work, visit the [source UI](https://pxdata.stat.fi/PxWeb/pxweb/fi/StatFin/StatFin__vkour/statfin_vkour_pxt_12br.px/) to check the correct API endpoint and JSON schema for your query.
 
-4.  **Food Supply Data (via Kaggle - FAOSTAT source):**
-    * **What:** Data on food supply quantity (kg/capita/year) and nutritional values (kcal/capita/day, protein, fat) for various food items across many countries. Originally from the UN Food and Agriculture Organization (FAOSTAT).
-    * **Get This:** Download the CSV from Kaggle: [https://www.kaggle.com/datasets/aliesmaeilpoor/ediblefoods-1961-to-2011](https://www.kaggle.com/datasets/aliesmaeilpoor/ediblefoods-1961-to-2011)
-    * **Key Columns/Data to Use:** Filter by `Area` (e.g., 'Finland'). Select relevant `Item`s (e.g., 'Fish, Seafood', 'Fruits - Excluding Wine', 'Vegetables', 'Animal fats', 'Milk - Excluding Butter') and `Element`s (e.g., `Food supply quantity (kg/capita/yr)` or `Food supply (kcal/capita/day)`).
-    * **Format:** CSV.
-    * **Registration/API Key Needed?:** **Yes**, Kaggle account required to download via website UI. Kaggle API setup needed for programmatic download.
-    * **Bootstrap:** Be aware the data **ends in 2011**. Filter for 'Finland' and start by analyzing the trend for *one or two specific food items* (like Fish or Fruits) or a broad `Element` like total `Food supply (kcal/capita/day)`. Compare its trend over the available years (1961-2011) with happiness data for overlapping years if possible.
+
+5.  **OECD Data:**
+    * **What:** Data for OECD countries, strong on well-being metrics and international comparisons.
+    * **Where to find:**
+        * [OECD Data Portal](https://data.oecd.org/)
+        * [OECD Better Life Index](https://www.oecdbetterlifeindex.org/)
+    * **How:** You will need to search or browse the OECD data portal and Better Life Index for relevant indicators. Download tables (CSV/Excel) for Finland and comparison countries. Try searching for indicators like average wages, social expenditure, or life satisfaction.
+    * **Important:** These sources require you to do some searching, filtering, and manual downloading. Finding and extracting the right data may require some effort—explore, filter, and download what you find most interesting!
+
+6.  **World Bank Open Data:**
+    * **What:** Global indicators for economic, social, and development factors.
+    * **Where to find:** [https://data.worldbank.org/](https://data.worldbank.org/)
+    * **How:** You will need to search for indicators (e.g., GDP per capita, life expectancy, internet usage, unemployment) and download time series data as CSV/Excel for Finland and other countries. No registration needed.
+    * **Important:** The World Bank has a huge range of indicators—finding the right data may take some searching and filtering. You are expected to explore, search, and connect what you find to happiness!
+
+7.  **Statistics Finland PxWeb (Tilastokeskus PxWeb):**
+    * **What:** Official Finnish statistics on a wide range of topics, accessible via the PxWeb API and web interface.
+    * **Where to find:** [StatFin Database access page](https://pxdata.stat.fi/PxWeb/pxweb/en/StatFin/)
+    * **How:** You will need to browse or search for tables, use the "Show API query" button for programmatic access, or download available CSV/Excel files. Many tables allow you to select breakdowns by year, gender, region, etc.
+    * **Important:** There are many rich, multi-dimensional datasets—finding and extracting the right data may require some effort. You are encouraged to explore and try to find something interesting and relevant to your happiness analysis!
 
 **Creative / Humorous Data Ideas (Optional Bonus):**
 
