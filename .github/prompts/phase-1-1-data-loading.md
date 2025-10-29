@@ -10,20 +10,20 @@ Create a robust data loading system for the existing CSV files in the data/ fold
 - `data/WHR2024.csv`: World Happiness Report 2024 (145 countries, happiness scores and factors)
 - `data/EdibleFoods-1961-2011.csv`: Food supply data 1961-2011 (8927 records, nutrition and food quantities)
 
-## Tasks
-1. Create a Python project structure with proper imports and dependencies
-2. Build a DataLoader class that can handle both CSV files with validation
-3. Implement data quality checks and summary statistics
-4. Create initial exploratory data analysis focused on Finland
-5. Set up error handling and logging
+## Enhanced Copilot Tasks
+1. **Generate a scalable Python project structure** with proper imports, dependencies, and modern architectural best practices following clean code principles
+2. **Build a modular, reusable DataLoader class** that handles both CSV files with comprehensive validation, type annotations, and well-documented methods
+3. **Implement robust data quality checks** and summary statistics using pandas best practices with error handling and extensible design
+4. **Create comprehensive exploratory data analysis** focused on Finland using state-of-the-art data science patterns with clear separation of concerns
+5. **Set up production-ready error handling** and logging with scalable architecture that can be easily extended
 
-## Specific Implementation Requirements
-- Use pandas for data manipulation
-- Include data validation (missing values, data types, country name consistency)
-- Generate summary statistics for both datasets
-- Filter and analyze Finland-specific data
-- Create country mapping between datasets (handle name variations)
-- Implement caching for processed data
+## Enhanced Implementation Requirements
+- **Use pandas with modern best practices** for data manipulation, including type annotations and comprehensive docstrings
+- **Include scalable data validation** (missing values, data types, country name consistency) with modular, reusable validation functions
+- **Generate comprehensive summary statistics** for both datasets using clean code principles and extensible statistical analysis
+- **Filter and analyze Finland-specific data** with well-structured functions that follow separation of concerns
+- **Create robust country mapping** between datasets with error handling and configurable name variations management
+- **Implement intelligent caching** for processed data using state-of-the-art caching patterns and performance optimization
 
 ## Expected Outputs
 - Working DataLoader class with methods for both files
@@ -39,4 +39,12 @@ Create a robust data loading system for the existing CSV files in the data/ fold
 - [ ] Code includes comprehensive error handling
 - [ ] Initial analysis provides meaningful insights about Finnish data
 
-Please implement this step by step, testing each component as you build it.
+## Copilot Optimization Keywords
+When implementing, use these specific phrases to get the best results from GitHub Copilot:
+- "Generate modular, reusable functions with type annotations"
+- "Create scalable data processing pipeline following clean code principles"
+- "Implement comprehensive error handling with state-of-the-art patterns"
+- "Build extensible validation system with well-documented methods"
+- "Design maintainable architecture with separation of concerns"
+
+Please implement this step by step, testing each component as you build it, following modern Python best practices and clean code principles.

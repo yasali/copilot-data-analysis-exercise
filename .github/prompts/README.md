@@ -8,6 +8,8 @@ This document provides a quick reference to all the effective prompts created fo
 .github/prompts/
 ├── implementation-plan.md           # Comprehensive project plan
 ├── acceptance-criteria.md           # Detailed success criteria
+├── workshop-guide.md                # 7-session workshop structure
+├── enhanced-copilot-prompts.md      # Copilot-optimized prompt library
 ├── phase-1-1-data-loading.md        # Data infrastructure setup
 ├── phase-1-2-api-integration.md     # External data integration
 ├── phase-2-1-statistical-analysis.md # Core analysis engine
@@ -68,23 +70,24 @@ This document provides a quick reference to all the effective prompts created fo
 
 ## Using These Prompts Effectively
 
-### For GitHub Copilot Chat
-1. Copy the entire prompt content from the relevant phase file
-2. Paste into Copilot Chat with any project-specific modifications
-3. Follow up with specific questions about implementation details
-4. Request code reviews and optimization suggestions
+### 🎯 For GitHub Copilot Chat (Enhanced)
+1. **Use Enhanced Prompts:** Start with `enhanced-copilot-prompts.md` for Copilot-optimized versions
+2. **Include Magic Keywords:** Always use "modular", "scalable", "clean code principles", "type annotations"
+3. **Be Technology-Specific:** Mention exact libraries (pandas, plotly, streamlit, pytest)
+4. **Request Documentation:** Ask for "comprehensive docstrings", "usage examples", "type annotations"
+5. **Follow-up Strategically:** Request code reviews using architectural improvement language
 
-### For AI Pair Programming
-1. Start each session by reviewing the phase objectives
-2. Use the prompt as context for your coding session
-3. Validate outputs against the success criteria listed
-4. Move systematically through the implementation requirements
+### 🏗️ For Workshop Sessions
+1. **Follow Workshop Guide:** Use `workshop-guide.md` for structured 7-session approach
+2. **Session-Based Learning:** Each session builds Copilot skills while delivering functionality
+3. **Practice Enhanced Prompting:** Learn effective keyword usage and architectural thinking
+4. **Validate Learning:** Check against session success criteria before proceeding
 
-### For Team Collaboration
-1. Share relevant prompt files with team members
-2. Use acceptance criteria for code review checkpoints
-3. Track progress against the detailed task lists
-4. Adapt prompts based on specific technology choices
+### 👥 For Team Collaboration
+1. **Shared Vocabulary:** Use enhanced prompts to establish consistent code quality expectations
+2. **Code Review Standards:** Apply acceptance criteria during peer reviews
+3. **Progressive Enhancement:** Start with basic prompts, evolve to enhanced versions
+4. **Knowledge Sharing:** Document effective prompt patterns discovered during development
 
 ## Key Success Factors
 
