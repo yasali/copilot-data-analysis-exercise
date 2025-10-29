@@ -31,4 +31,4 @@ echo ""
 echo "Press Ctrl+C to stop the application"
 echo ""
 
-streamlit run src/dashboard/app.py --server.headless true
+streamlit run app.py --server.headless true

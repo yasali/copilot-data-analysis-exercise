@@ -115,11 +115,15 @@ copilot-data-analysis-exercise/
 
 4. **Run the dashboard**
    ```bash
-   streamlit run src/dashboard/app.py
+   # Option 1: Use the run script (recommended)
+   ./run.sh
+   
+   # Option 2: Run directly
+   streamlit run app.py
    ```
 
 5. **Access the application**
-   - Open your browser to `http://localhost:8501`
+   - Open your browser to `http://localhost:8501` or `http://localhost:8502`
    - Navigate through different analysis sections using the sidebar
 
 ### Quick Analysis

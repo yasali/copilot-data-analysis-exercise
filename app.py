@@ -1,4 +1,4 @@
-"""Main Streamlit dashboard application."""
+"""Main application entry point."""
 
 import streamlit as st
 import pandas as pd
@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 
 # Add project root to path
-project_root = Path(__file__).parent.parent.parent
+project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
 from src.data.loader import DataLoader
@@ -270,8 +270,8 @@ elif page == "📋 About":
     consistently high happiness rankings in the World Happiness Report.
     
     ### Data Sources
-    - **World Happiness Report 2024**: 145 countries, 10+ happiness factors
-    - **Food Supply Data (1961-2011)**: 8,927 records of food consumption patterns
+    - **World Happiness Report 2024**: 143 countries, 10+ happiness factors
+    - **Food Supply Data (1961-2011)**: 8,925 records of food consumption patterns
     
     ### Analysis Methods
     - Pearson and Spearman correlation analysis
